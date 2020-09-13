@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Header from '../../components';
+import { Header } from 'Components';
 import styles from './Home.module.scss';
 
 export const Home = () => {
