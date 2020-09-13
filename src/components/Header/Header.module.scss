@@ -1,0 +1,52 @@
+.header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: $slack-color;
+    color: #ffffff;
+    .lhs {
+        display: flex;
+        flex: 1;
+        justify-content: center;
+        align-items: center;
+        .timeIcon {
+            width: 20px;
+            height: 20px;
+        }
+        .search {
+            margin: 0 1rem;
+            display: flex;
+            align-items: center;
+            background: rgb(67,30,68);
+            box-shadow: inset 0 0 0 1px rgb(104,74,104);
+            border-radius: 6px;
+            .searchIcon {
+                margin-left: 10%;
+                margin-right: 10px;
+            }
+            .focus {
+                box-shadow: none;
+                outline: 0;
+                border: none;
+            }
+            .inputRoot {
+                box-shadow: none;
+                outline: none;
+            }
+            .input {
+                box-shadow: none;
+                outline: none;
+                color: #ffffff;
+                border: none;
+                min-width: 35vw;
+                background: transparent;
+            }
+        }
+    }
+    .rhs {
+        .avatar {
+            height: 28px;
+            width: 28px;
+        }
+    }
+}

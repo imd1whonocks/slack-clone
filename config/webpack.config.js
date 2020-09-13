@@ -122,6 +122,13 @@ module.exports = function(webpackEnv) {
           options: {
             sourceMap: true,
           },
+        },
+        {
+          loader: 'sass-resources-loader',
+          options: {
+            // Provide path to the file with resources
+            resources: paths.appSrc + '/scss/index.scss',
+          },
         }
       );
     }
