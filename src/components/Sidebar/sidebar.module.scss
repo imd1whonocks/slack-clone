@@ -1,0 +1,19 @@
+.sidebar {
+    background-color: #3F0E40;
+    color: #fff;
+    max-width: 260px;
+    height: 100%;
+    .divider {
+        border: 1px solid #522653;
+        margin-top: 7px;
+        margin-bottom: 7px;
+    }
+    .channelList {
+        height: auto;
+        &.hidden {
+            height: 0;
+            overflow: hidden;
+            transition: height 400ms ease-in-out;
+        }
+    }
+}
