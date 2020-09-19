@@ -1,10 +1,13 @@
 import React, { } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import { Header, Sidebar, Chat } from 'Components';
+import { Header, Sidebar, Chat, Login } from 'Components';
+import { useStateValue } from 'Context/State';
 import styles from './Home.module.scss';
 
 export const Home = () => {
+    const [{user}] = useStateValue();
+    if (!user) return <Login/>
     return (
         <div className={styles.layout}>
             <Header/>

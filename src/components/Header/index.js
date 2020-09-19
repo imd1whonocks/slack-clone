@@ -5,9 +5,11 @@ import SearchIcon from '@material-ui/icons/Search';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import Input from '@material-ui/core/Input';
 
+import { useStateValue } from 'Context/State';
 import styles from './Header.module.scss';
 
 export function Header() {
+    const [{user}] = useStateValue();
     return (
         <div className={styles.header}>
             <div className={styles.lhs}>
@@ -30,8 +32,8 @@ export function Header() {
             <div className={styles.rhs}>
                 <Avatar
                     className={styles.avatar}
-                    alt={'Shashank'}
-                    src=''
+                    alt={user?.name}
+                    src={user?.photoURL}
                 />
             </div>            
         </div>
