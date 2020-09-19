@@ -8,12 +8,13 @@ function SidebarItem({
     isChannel,
     className,
     onClick,
+    isSelected = false,
 }) {
     const handleOnClick = () => {
         onClick && onClick();
     }
     return (
-        <div className={cx(className, styles.item)} onClick={handleOnClick}>
+        <div className={cx(className, styles.item, {[styles.selected]: isSelected})} onClick={handleOnClick}>
             {Icon ? <Icon classes={{root: styles.icon}} /> : null}
             {
                 isChannel ? 

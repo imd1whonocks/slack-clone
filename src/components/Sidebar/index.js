@@ -23,7 +23,22 @@ function Sidebar() {
     const [channels, setChannels] = useState([]);
     const [showChannels, setShowChannels] = useState(true);
     useEffect(() => {
-        db.collection('channels').get({source: 'cache'}).then((querySnapshot) => {
+        getAllChannels();
+    }, []);
+    const handleChannelListToggle = () => {
+        setShowChannels(!showChannels);
+    }
+    const handleAddChannnel = () => {
+        const channelName = prompt('Please enter channel name')
+        if (channelName) {
+            db.collection('channels').add({
+                name: channelName
+            })
+            getAllChannels();
+        }
+    }
+    const getAllChannels = () => {
+        db.collection('channels').get().then((querySnapshot) => {
             const data = [];
             querySnapshot.forEach(doc =>  {
                 // doc.data() is never undefined for query doc snapshots
@@ -34,9 +49,6 @@ function Sidebar() {
             });
             setChannels(data);
         });
-    }, []);
-    const handleChannelListToggle = () => {
-        setShowChannels(!showChannels);
     }
     return (
         <div className={styles.sidebar}>
@@ -53,7 +65,7 @@ function Sidebar() {
             <hr className={styles.divider}></hr>
             <SidebarItem title={'Channels'} Icon={showChannels ? ArrowDropDownOutlinedIcon : ArrowRightOutlinedIcon} isChannel={false} onClick={handleChannelListToggle}/>
             <ChannelList channelList={channels} className={cx(styles.channelList, {[styles.hidden]: !showChannels})}/>
-            <SidebarItem title={'Add a channel'} Icon={AddOutlinedIcon} isChannel={false}/>
+            <SidebarItem title={'Add a channel'} Icon={AddOutlinedIcon} isChannel={false} onClick={handleAddChannnel}/>
         </div>
     )
 }
