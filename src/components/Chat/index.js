@@ -25,7 +25,7 @@ function Chat() {
         console.log('fetch channel details: ', channelId);
     }
     const handleSendMessage = (message) => {
-        if (channelId) {
+        if (channelId && message != '') {
             db.collection('channels')
             .doc(channelId)
             .collection('messages')
