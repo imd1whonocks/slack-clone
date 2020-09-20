@@ -1,5 +1,6 @@
 .root {
     display: grid;
+    grid-template-columns: 36px 1fr;
     grid-template-areas: "avatar usernameBox"
                          "avatar message";
     color: #1C1D1C;

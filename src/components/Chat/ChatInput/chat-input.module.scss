@@ -1,0 +1,22 @@
+.root {
+    border: 1px solid;
+    margin: 0 20px;
+    border-radius: 4px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    width: 94%;
+    margin-bottom: 15px;
+    margin-top: 5px;
+    form {
+        display: flex;
+        padding-left: 10px;
+        .input {
+            border: 0;
+            flex-grow: 1;
+            &:focus {
+                outline: 0;
+                box-shadow: 0;
+            }
+        }
+    }
+}

@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import firebase from 'firebase';
 
 import Header from './Header';
 import MessageList from './MessageList';
+import ChatInput from './ChatInput';
 import db from 'App/firebase';
+import { useStateValue } from 'Context/State';
 import styles from './chat.module.scss';
 
 let unsubscribe = null;
@@ -11,11 +14,7 @@ function Chat() {
     const { channelId } = useParams();
     const [ channelDetails, setChannelDetails ] = useState({});
     const [ messages, setMessages ] = useState([]);
-    useEffect(() => {
-        return () => {
-            console.log('cleanup')
-        }
-    }, [])
+    const [ { user } ] = useStateValue();
     useEffect(() => {
         unsubscribe && unsubscribe();
         setMessages([]);
@@ -24,6 +23,19 @@ function Chat() {
     }, [channelId])
     const handleInfoClick = () => {
         console.log('fetch channel details: ', channelId);
+    }
+    const handleSendMessage = (message) => {
+        if (channelId) {
+            db.collection('channels')
+            .doc(channelId)
+            .collection('messages')
+            .add({
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                userImage: user.photoURL,
+                message: message,
+                userName: user.name,
+            })
+        }
     }
     const getChannelDetails = (channelId) => {
         db.collection('channels').doc(channelId).get().then(doc => {
@@ -52,16 +64,16 @@ function Chat() {
                 setMessages(data);
             })
     }
-    console.log(messages)
     return (
         <div className={styles.root}>
             <Header 
                 channelName={channelDetails?.name} 
                 isStared={false} 
-                desc={'Desc will be added later'} 
+                desc={'Channel description will be added later'} 
                 onInfoClick={handleInfoClick}
             />
             <MessageList messages={messages} />
+            <ChatInput sendMessage={handleSendMessage} channelName={channelDetails?.name}/>
         </div>
     )
 }
